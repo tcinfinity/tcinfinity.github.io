@@ -65,6 +65,24 @@ window.addEventListener('load', () => {
     
   });
 
+  document.addEventListener('click', () => {
+    
+    paused = !paused;
+
+    if (paused) {
+      clearInterval(interval);
+      deltatime = performance.now() - prevtime;
+    }
+
+    else {
+      setTimeout(() => {
+        timer()
+        interval = setInterval(timer, 1000);
+      }, 1000 - deltatime)
+    }
+
+  })
+
 });
 
 function timer() {
