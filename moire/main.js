@@ -8,9 +8,11 @@ let no = 1;
 
 let parent = -1;
 
+let basecircle;
+
 function init() {
 
-  circle = document.getElementsByClassName('circle')[0];
+  circle = document.getElementsByClassName('circle')[1];
   circlewrapper = document.getElementsByClassName('wrapper')[0];
 
   counter = document.getElementsByClassName('counter')[0];
@@ -21,8 +23,17 @@ function init() {
     e.stopPropagation();
   })
 
+  basecircle = document.querySelector('.circle.nospin');
+
   document.addEventListener('keydown', (e) => {
-    if (13 === (e.which | e.keyCode) || e.key === 'Enter') {e.preventDefault(); toggleSlide();}
+    if (13 === (e.which | e.keyCode) || e.key === 'Enter') {
+      e.preventDefault(); 
+      toggleSlide();
+    }
+    else if (32 === (e.which | e.keyCode) || e.key === ' ') {
+      e.preventDefault();
+      basecircle.classList.toggle('hidden');
+    }
   })
 
   document.addEventListener('click', toggleSlide);

@@ -29,6 +29,14 @@ body {
 	100% { transform: rotate(380deg); }
 }
 
+.circle.nospin {
+	animation: none;
+}
+
+.circle.nospin.hidden {
+	visibility: hidden;
+}
+
 .counter {
 	width: 100vw;
 	height: 100vh;
