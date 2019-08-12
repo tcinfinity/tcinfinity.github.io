@@ -23,7 +23,7 @@ function init() {
     e.stopPropagation();
   })
 
-  basecircle = document.querySelector('.circle.nospin');
+  basecircle = document.querySelector('.circle-nospin');
 
   document.addEventListener('keydown', (e) => {
     if (13 === (e.which | e.keyCode) || e.key === 'Enter') {
