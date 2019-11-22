@@ -41,7 +41,7 @@ window.addEventListener('load', () => {
   let startmin = Math.floor(userinput/60);
   let startsec = userinput % 60;
   if (startsec < 10) {
-    startsec = '0' + sec.toString();
+    startsec = '0' + startsec.toString();
   }
 
   main_timer.innerText = `${startmin} 分钟`;
