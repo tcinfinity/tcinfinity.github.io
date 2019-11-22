@@ -3,7 +3,7 @@ let prevt = 0;
 let red = 0;
 let interval;
 
-let paused = !0; //!1 - but since click-pause event fires toggle back one state of boolean;
+let paused = !1;
 
 let prevtime = 0;
 let deltatime = 0;
@@ -44,6 +44,7 @@ window.addEventListener('load', () => {
   sub_timer.innerText = `${startmin} 分 ${startsec} 秒`;
 
   t = userinput;
+  prevt = startsec;
 
 
   start_button.addEventListener('click', () => {
@@ -53,25 +54,26 @@ window.addEventListener('load', () => {
 
     interval = setInterval(timer, 1000);
 
+    // pause on space or click
+    document.addEventListener('keydown', (e) => {
+
+      e = window.event || e;
+
+      if (e.key === ' ') {
+        e.preventDefault();
+        onPause();
+      }
+      
+    });
+
+    document.addEventListener('click', onPause);
+
   });
-
-
-  document.addEventListener('keydown', (e) => {
-
-    e = window.event || e;
-
-    if (e.key === ' ') {
-      e.preventDefault();
-      onPause();
-    }
-    
-  });
-
-  document.addEventListener('click', onPause);
 
 });
 
 function timer() {
+
   t--;
   console.log(t)
 
