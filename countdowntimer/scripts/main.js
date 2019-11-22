@@ -55,7 +55,7 @@ window.addEventListener('load', () => {
 
   });
 
-  
+
   document.addEventListener('keydown', (e) => {
 
     e = window.event || e;
@@ -103,6 +103,7 @@ window.addEventListener('load', () => {
 
 function timer() {
   t--;
+  console.log(t)
 
   let min = Math.floor(t / 60);
   let sec = t % 60;
@@ -130,4 +131,13 @@ function timer() {
   sub_timer.innerText = `${min} 分 ${sec} 秒`
 
   prevtime = performance.now();
+
+  if (t == 0) {
+    clearInterval(interval);
+    playSound();
+  }
+}
+
+function playSound() {
+
 }
