@@ -61,43 +61,13 @@ window.addEventListener('load', () => {
     e = window.event || e;
 
     if (e.key === ' ') {
-
       e.preventDefault();
-      paused = !paused;
-
-      if (paused) {
-        clearInterval(interval);
-        deltatime = performance.now() - prevtime;
-      }
-
-      else {
-        setTimeout(() => {
-          timer()
-          interval = setInterval(timer, 1000);
-        }, 1000 - deltatime)
-      }
-
+      onPause();
     }
     
   });
 
-  document.addEventListener('click', () => {
-    
-    paused = !paused;
-
-    if (paused) {
-      clearInterval(interval);
-      deltatime = performance.now() - prevtime;
-    }
-
-    else {
-      setTimeout(() => {
-        timer()
-        interval = setInterval(timer, 1000);
-      }, 1000 - deltatime)
-    }
-
-  })
+  document.addEventListener('click', onPause);
 
 });
 
@@ -135,6 +105,22 @@ function timer() {
   if (t == 0) {
     clearInterval(interval);
     playSound();
+  }
+}
+
+function onPause() {
+  paused = !paused;
+
+  if (paused) {
+    clearInterval(interval);
+    deltatime = performance.now() - prevtime;
+  }
+
+  else {
+    setTimeout(() => {
+      timer()
+      interval = setInterval(timer, 1000);
+    }, 1000 - deltatime)
   }
 }
 
