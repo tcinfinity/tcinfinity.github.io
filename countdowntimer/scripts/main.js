@@ -31,9 +31,20 @@ window.addEventListener('load', () => {
   main_timer = document.getElementById('main_timer');
   sub_timer = document.getElementById('sub_timer');
 
-  userinput = parseInt(prompt('Seconds'));
-  main_timer.innerText = `${Math.floor(userinput/60)} 分钟`;
+  // set timer start value
+  const userinput = parseInt(prompt('Seconds'));
+
+  let startmin = Math.floor(userinput/60);
+  let startsec = userinput % 60;
+  if (startsec < 10) {
+    startsec = '0' + sec.toString();
+  }
+
+  main_timer.innerText = `${startmin} 分钟`;
+  sub_timer.innerText = `${startmin} 分 ${startsec} 秒`;
+
   t = userinput;
+
 
   start_button.addEventListener('click', () => {
 
@@ -44,6 +55,7 @@ window.addEventListener('load', () => {
 
   });
 
+  
   document.addEventListener('keydown', (e) => {
 
     e = window.event || e;
