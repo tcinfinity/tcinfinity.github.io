@@ -33,6 +33,7 @@ function init() {
     else if (32 === (e.which | e.keyCode) || e.key === ' ') {
       e.preventDefault();
       basecircle.classList.toggle('hidden');
+      console.log('hello')
     }
   })
 

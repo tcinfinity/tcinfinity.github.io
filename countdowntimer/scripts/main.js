@@ -3,7 +3,7 @@ let prevt = 0;
 let red = 0;
 let interval;
 
-let paused = !0 //!1, see countdown timer (due to click event firing);
+let paused = !0; //!1 - but since click-pause event fires toggle back one state of boolean;
 
 let prevtime = 0;
 let deltatime = 0;
@@ -30,6 +30,10 @@ window.addEventListener('load', () => {
   main_div = document.getElementById('main');
   main_timer = document.getElementById('main_timer');
   sub_timer = document.getElementById('sub_timer');
+
+  userinput = parseInt(prompt('Seconds'));
+  main_timer.innerText = `${Math.floor(userinput/60)} 分钟`;
+  t = userinput;
 
   start_button.addEventListener('click', () => {
 
@@ -86,7 +90,7 @@ window.addEventListener('load', () => {
 });
 
 function timer() {
-  t++;
+  t--;
 
   let min = Math.floor(t / 60);
   let sec = t % 60;
