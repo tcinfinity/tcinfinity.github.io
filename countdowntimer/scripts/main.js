@@ -1,7 +1,7 @@
 let t = 0;
-let prevt = 0;
 let red = 0;
 let interval;
+let currmin;
 
 let paused = !1;
 
@@ -10,6 +10,10 @@ let deltatime = 0;
 
 let splash_div, start_button;
 let main_div, main_timer, sub_timer;
+
+let startbuttonclicked = !1;
+
+let audio = new Audio('../../assets/timer/bell.wav');
 
 
 performance.now = (() => 
@@ -44,7 +48,6 @@ window.addEventListener('load', () => {
   sub_timer.innerText = `${startmin} 分 ${startsec} 秒`;
 
   t = userinput;
-  prevt = startsec;
 
 
   start_button.addEventListener('click', () => {
@@ -68,6 +71,8 @@ window.addEventListener('load', () => {
 
     document.addEventListener('click', onPause);
 
+    startbuttonclicked = !0;
+
   });
 
 });
@@ -80,26 +85,27 @@ function timer() {
   let min = Math.floor(t / 60);
   let sec = t % 60;
 
-  if (sec < 10) {
-    sec = '0' + sec.toString();
+  if (sec == 0) {
+    currmin = min;
+    red = 5;
+    audio.play();
   }
 
-  if (min != prevt) {
-    prevt = min;
-    red = 5;
-    // TODO: bell
+  if (sec < 10) {
+    sec = '0' + sec.toString();
   }
 
   if (red > 0) {
     red--;
     main_timer.style.color = 'red';
     main_timer.style.fontWeight = 'bold';
+    main_timer.innerText = `${currmin} 分钟`
   } else {
     main_timer.style.color = 'black';
     main_timer.style.fontWeight = 'normal';
+    main_timer.innerText = `${min} 分钟`
   }
 
-  main_timer.innerText = `${min} 分钟`
   sub_timer.innerText = `${min} 分 ${sec} 秒`
 
   prevtime = performance.now();
@@ -111,21 +117,27 @@ function timer() {
 }
 
 function onPause() {
-  paused = !paused;
 
-  if (paused) {
-    clearInterval(interval);
-    deltatime = performance.now() - prevtime;
-  }
+  if (startbuttonclicked) {
 
-  else {
-    setTimeout(() => {
-      timer()
-      interval = setInterval(timer, 1000);
-    }, 1000 - deltatime)
+    paused = !paused;
+
+    if (paused) {
+      clearInterval(interval);
+      deltatime = performance.now() - prevtime;
+    }
+
+    else {
+      setTimeout(() => {
+        timer()
+        interval = setInterval(timer, 1000);
+      }, 1000 - deltatime)
+    }
+
   }
+  
 }
 
 function playSound() {
-
+  audio.play();
 }
